@@ -1,0 +1,34 @@
+<div mat-dialog-title class="d-flex">
+  <h1 class="flex-fill m-0">
+    Create Rule Engine
+  </h1>
+
+  <button mat-icon-button (click)="onDismiss()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<form [formGroup]="createFlowForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <div class="form-group">
+      <mat-label> Rule Name </mat-label>
+
+      <mat-form-field appearance="outline" class="w-100 mat-field-no-margin input-no-label">
+        <input matInput formControlName="name" cdkFocusInitial />
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-label> Rule Description </mat-label>
+      <mat-form-field appearance="outline" class="w-100 mat-field-no-margin input-no-label">
+        <input matInput formControlName="description" />
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div mat-dialog-actions class="justify-content-end">
+    <button mat-stroked-button (click)="onDismiss()" type='button'>Cancel</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="createFlowForm.invalid">Create</button>
+  </div>
+</form>

@@ -1,0 +1,145 @@
+<div>
+    <div class="d-flex align-items-center">
+
+        <mat-icon class="mr-2">mediation</mat-icon>
+
+        <h2 class="m-0 mr-3 font-weight-500">
+            Rules
+        </h2>
+
+        <button
+            mat-stroked-button
+            class="mr-2 text-primary"
+            [matMenuTriggerFor]="menu">
+            Create...
+        </button>
+
+        <button mat-stroked-button class="text-primary">...</button>
+    </div>
+
+    <mat-tab-group class="mt-2">
+        <mat-tab label="All Rules" class="text-primary">
+            <div class="mt-5">
+                <div class="desktop-table" *ngIf="rules.length; else noRules">
+                    <mat-table #table [dataSource]="dataSource">
+                      <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef class="text-dark">
+                            Name
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let rule" class="text-ellipsis">
+                          <span   (click)="gotoRule(rule)"  class="text-ellipsis d-flex align-items-center" *ngIf="!rule.ruleNameEdit; else editName">
+                            <mat-icon class="mr-2">mediation</mat-icon>
+                            <span class="text-primary">
+                                {{rule.name}}
+                            </span>
+                          </span>
+                          <ng-template #editName>
+                            <div class="form-group w-100 d-flex align-items-center mt-3">
+                              <mat-form-field appearance="outline" class="w-100 mat-field-no-margin input-no-label" >
+                                <input matInput [value]="rule?.name" [(ngModel)]="changeName" #newRuleName/>
+                              </mat-form-field>
+
+                              <button
+                                mat-icon-button
+                                class="ml-1 text-success"
+                                (click)="newRuleName.value && updateRuleName(changeName,changeDescription)"
+                                [class.opacity-p4]="!newRuleName.value">
+                                <mat-icon>done</mat-icon>
+                              </button>
+
+                              <button mat-icon-button class="text-danger" (click)="rule.ruleNameEdit = false">
+                                <mat-icon>clear</mat-icon>
+                              </button>
+                            </div>
+                          </ng-template>
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="description">
+                        <mat-header-cell *matHeaderCellDef class="text-dark">
+                            Description
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let rule" class="text-ellipsis">
+                          <span class="text-ellipsis" *ngIf="!rule.ruleNameEdit; else editDescription">
+                            {{rule.description}}
+                          </span>
+                          <ng-template #noDescription>
+                            <i class="text-muted">No description</i>
+                          </ng-template>
+
+
+                          <ng-template #editDescription>
+                            <div class="form-group w-100 d-flex align-items-center ml-1 mt-3">
+                              <mat-form-field appearance="outline" class="w-100 mat-field-no-margin input-no-label">
+                                <input matInput [value]="rule?.description" [(ngModel)]="changeDescription" #newRuleDescription/>
+                              </mat-form-field>
+
+                              <button
+                                mat-icon-button
+                                class="ml-1 text-success"
+                                (click)="newRuleDescription.value && updateRuleName(changeName,changeDescription)"
+                                [class.opacity-p4]="!newRuleDescription.value">
+                                <mat-icon>done</mat-icon>
+                              </button>
+
+                              <button mat-icon-button class="text-danger" (click)="rule.ruleNameEdit = false">
+                                <mat-icon>clear</mat-icon>
+                              </button>
+                            </div>
+                          </ng-template>
+
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="modified">
+                        <mat-header-cell *matHeaderCellDef class="text-dark">
+                            Modified
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let rule" class="text-ellipsis">
+                          <span class="text-ellipsis">
+                            {{ getFormatedDate(rule) }}
+                          </span>
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef class="text-dark">
+                            Actions
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let rule" class="text-ellipsis d-flex">
+                            <button *ngIf="!rule.ruleNameEdit" mat-stroked-button color="success" class="mr-1" (click)="$event.stopPropagation()">Run</button>
+
+                            <button mat-icon-button *ngIf="!rule.ruleNameEdit" class="text-primary mr-1" (click)="setRule(rule)">
+                                <mat-icon>create</mat-icon>
+                            </button>
+
+                            <button mat-icon-button *ngIf="!rule.ruleNameEdit" class="text-danger mr-1" (click)="$event.stopPropagation(); deleteRule(rule)">
+                                <mat-icon>clear</mat-icon>
+                            </button>
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row
+                            *matRowDef="let row; columns: displayedColumns;"
+
+                            class="cursor-pointer">
+                       </mat-row>
+                    </mat-table>
+                </div>
+
+                <ng-template #noRules>
+                    <div><i>No Rules found</i></div>
+                </ng-template>
+            </div>
+        </mat-tab>
+        <mat-tab label="Owner"> </mat-tab>
+    </mat-tab-group>
+
+</div>
+
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="createFlow()" style="width: 200px;">Create Rule Engine</button>
+    <button mat-menu-item>Create Folder</button>
+</mat-menu>

@@ -1,0 +1,24 @@
+.rule-container {
+    &:hover {
+       background: rgba(0,0,0,.04);
+    }
+}
+
+.desktop-table {
+    .mat-column-name{
+        flex: 0 0 15%;
+    }
+
+    .mat-column-description{
+        flex: 0 0 53%;
+    }
+
+    .mat-column-modified{
+        flex: 0 0 15%;
+    }
+
+    .mat-column-actions{
+        flex: 0 0 17%;
+    }
+
+}

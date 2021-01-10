@@ -1,0 +1,80 @@
+.dataset-icon {
+    font-size: 4rem;
+    height: unset;
+    width: unset;
+}
+
+.border-left-custom {
+    border-left: 2px solid #DEE2E6;
+}
+
+.transformation-container {
+    &:hover{
+        background-color: #c8d1e4;
+    }
+}
+
+.mat-icon-15 {
+    font-size: 15px;
+    height: 15px;
+    width: 15px;
+}
+
+.opacity-p4 {
+    opacity: 0.4;
+}
+
+.activeClass{
+    border-color: #0027a0 !important;
+    bottom: 6px
+}
+
+.inActiveClass{
+    border-color: #9a9a9a !important;
+    bottom: 6px
+}
+
+.activeTitle{
+    color: #0027a0 !important;
+}
+
+.inActiveTitle{
+    color: #9a9a9a !important;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+.mat-drawer-inner-container{
+  width:200px;
+  height:600px;
+  margin-top:80px;
+  padding: 5px;
+}

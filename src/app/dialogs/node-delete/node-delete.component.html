@@ -1,0 +1,6 @@
+<mat-form-field appearance="outline">
+    <mat-label>Select Node</mat-label>
+    <mat-select (selectionChange)="edit($event.value)">
+        <mat-option *ngFor="let node of list" [value]="node">{{node?.label}}</mat-option>
+    </mat-select>
+</mat-form-field>
